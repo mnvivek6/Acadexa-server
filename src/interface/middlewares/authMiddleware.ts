@@ -37,6 +37,9 @@ const verifyToken = (authHeader: string|string[]|undefined,secretekey:Secret | G
               return res.status(403).json({ error: 'Invalid token' });
             }
             if (decode) {
+              console.log(decode,'decoded user is here');
+              
+              
                 (req as MyRequest).tutor = decode;
                 next();
                 
@@ -55,6 +58,8 @@ const verifyToken = (authHeader: string|string[]|undefined,secretekey:Secret | G
 }
 export const userAuthToken = (req: Request, res:Response, next: NextFunction) => {
   const authHeader: string | string[] | undefined = req.headers.user;
+ console.log(authHeader,'auth header from user auth side');
+ 
   verifyToken(authHeader, userSecretekey, req, res, next);
 };
 

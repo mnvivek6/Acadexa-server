@@ -21,7 +21,7 @@ export const tutorProfile = async ( req:CustomRequest,res:Response)=>{
         
     const data = req.body as object as object |any
     console.log(data,'here we get the data');
-    
+
     
     const tutorData:object ={
         qualification:data.qualification as string,

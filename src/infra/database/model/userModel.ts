@@ -11,6 +11,7 @@ const UserSchema = new Schema<User>({
     isBlocked: { type: Boolean, default: false },
     isMailvarified: { type: Boolean, default: false },
     isPremium: { type: Boolean, default: false },
+    image:{type:String}
 
 })
 

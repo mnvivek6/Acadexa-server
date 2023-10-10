@@ -12,7 +12,11 @@ const tutorRepository = tutorRepositoryImp(db)
 
 export const tutorLogin = async ( req:Request,res:Response)=>{
     try {
+        console.log('sdfgsdgdsfgsdfgdfgdfgdfgdsfgdsfgdsgdsfgdfgsdfgsdf');
+        
         const tutor:Tutor = req.body
+        console.log(tutor);
+        
           const {email,password} = tutor
         if(!email || !password || /^\s*$/.test(email) || /^\s*$/.test(password)){
             throw new AppError ('All fields are required',400)

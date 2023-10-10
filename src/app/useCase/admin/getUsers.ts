@@ -1,3 +1,5 @@
+import { User } from "../../../domain/entities/user/userValidation";
+import { adminRepository } from "../../../infra/repositories/admin/adminRepository";
 import { userRepository } from "../../../infra/repositories/user/userRepository";
 import { AppError } from "../../../untils/error";
 
@@ -22,4 +24,11 @@ return    async(userid:string,action:string):Promise<boolean|undefined>=>{
        return blockeduser
         
     }
+}
+
+export const getUserBySearch = (adminRepository:adminRepository)=>
+    async(searchQuery:string):Promise<User[]|undefined>=>{
+        const response = await adminRepository.searchUser(searchQuery)
+        return response
+    
 }

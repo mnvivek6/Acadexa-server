@@ -10,9 +10,13 @@ export const CreateCategory = (adminRepository:adminRepository)=>{
     }
 }
 
-export const getCategory = (adminrepository:adminRepository)=>
+export const getCategory = (adminRepository:adminRepository)=>
      async ():Promise<object[]|null>=>{
-        const categories = await  adminrepository.getcategory()
+        const categories = await  adminRepository.getcategory()
         return categories
-    
+}
+export const EditedCategory=(adminRepository:adminRepository)=>
+async(id:string,categorydata:object):Promise<category|null>=>{
+    const category = await adminRepository.editCategory(id,categorydata)
+    return category
 }

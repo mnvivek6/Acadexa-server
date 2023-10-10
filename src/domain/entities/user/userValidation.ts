@@ -8,6 +8,7 @@ export type User={
     isBlocked:boolean;
     isMailvarified:boolean;
     isPremium:boolean;
+    image:string
 
 }
 

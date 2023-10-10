@@ -37,8 +37,6 @@ export const userSignup = async (req: Request, res: Response) => {
            
             
             sendverifyEmail(req.body.name, req.body.email, createUser._id);
-            
-            
         } else {
             console.log(`${user.email}is not a valid email address.`);
 

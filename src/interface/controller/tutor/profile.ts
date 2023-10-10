@@ -12,10 +12,8 @@ export const profile = async(req:CustomRequest,res:Response)=>{
     try {
         
         const tutorId: string | undefined = req.tutor.tutor._id
+        console.log(tutorId,'tutor id is here');
 
-       
-       
-        
         const tutor = await ViewProfile(tutorRepository)(tutorId as string) 
         console.log(tutor,'tutor profile from vei');
         

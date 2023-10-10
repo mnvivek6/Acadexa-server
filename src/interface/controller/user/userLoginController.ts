@@ -26,11 +26,11 @@ export const userLogin = async ( req:Request,res:Response)=>{
         if(!email || !password || /^\s*$/.test(email) || /^\s*$/.test(password)){
             throw new AppError ('All fields are required',400)
         }
-
+         
         const userToken = await loginUser(userRepository)(user)
-        console.log(userToken);
+        console.log(userToken,'token is here in backend');
         
-        res.status(200).json({message:userToken})
+        res.status(200).json({userToken})
 
     } catch (error:any) {
         res.status(error.statusCode||500).json({message:error.message|| 'something went wrong'})
