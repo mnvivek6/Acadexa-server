@@ -20,7 +20,7 @@ export const passwordCompare:Function = async(plainTextPassword:string,hashedPas
 
 export  const createToken = (admin:adminLoginType):string=>{
 
-    const secreteKey:string|undefined = process.env.ADMIN_SECRET_KEY
+    const secreteKey:string|undefined = 'AdMiNsEcReTkEy'
     if(!secreteKey){throw new Error('No secret key found')}
 
 const token = jwt.sign({admin},secreteKey as string, {expiresIn:'1h'})

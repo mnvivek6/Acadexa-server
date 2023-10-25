@@ -19,7 +19,7 @@ export const passwordCompare:Function = async(plainTextPassword:string,hashedPas
 
 export const createToken = (tutor:object):string =>{
 
-    const secreteKey:string|undefined = process.env.TUTOR_SECRET_KEY
+    const secreteKey:string|undefined = 'TuToRsEcReTkEy'
     if(!secreteKey){throw new Error('no secret key found')}
 
     const token = jwt.sign({tutor},secreteKey as string,{expiresIn:'1day'})

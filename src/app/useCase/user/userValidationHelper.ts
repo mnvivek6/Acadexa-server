@@ -17,7 +17,7 @@ export const passwordCompare:Function = async(plainTextPassword:string,hashedPas
 export const createToken = (user: User): string => {
     // console.log(user,'inner side');
     
-    const secreteKey: string | undefined = process.env.USER_SECRET_KEY;
+    const secreteKey: string | undefined = 'Studentsecretkey';
     // console.log(secreteKey,'generated success fully');
     
 

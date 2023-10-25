@@ -29,7 +29,7 @@ const passwordCompare = (plainTextPassword, hashedPassword) => __awaiter(void 0,
 });
 exports.passwordCompare = passwordCompare;
 const createToken = (admin) => {
-    const secreteKey = process.env.ADMIN_SECRET_KEY;
+    const secreteKey = 'AdMiNsEcReTkEy';
     if (!secreteKey) {
         throw new Error('No secret key found');
     }
