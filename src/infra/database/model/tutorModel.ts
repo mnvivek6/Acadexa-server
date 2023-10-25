@@ -5,10 +5,10 @@ import { Tutor } from "../../../domain/entities/tutor/tutorValidation";
 export type mongoDBTutor = Model<Document<any,any,any>&Tutor>;
 
 const TutorSchema = new Schema<Tutor>({
-    name:{type:String ,required:true},
+    name:{type: String, required:true},
     email:{type:String, required:true},
     phone:{type:Number, required:true},
-    password:{type:String, required:true},
+    password:{type: String, required: true},
     image:{type:String},
     isBlocked:{type:Boolean, default:false},
     isMailVerified:{type:Boolean, default:false},
@@ -19,7 +19,8 @@ const TutorSchema = new Schema<Tutor>({
         year:{type:String},
         month:{type:String}
     },
-    category:{type:mongoose.Schema.Types.ObjectId ,ref:'category'},
+    category:{type:String},
+    verify:{type:Boolean,default:false}
    
 },{
     timestamps :{createdAt:true}

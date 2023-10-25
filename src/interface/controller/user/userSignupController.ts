@@ -16,7 +16,7 @@ export const userSignup = async (req: Request, res: Response) => {
     try {
 
         const user: User = req.body
-        console.log(user);
+        // console.log(user);
         
         if (!user.name || !user.email || !user.password || /^\s*$/.test(user.name) ||
             /^\s*$/.test(user.email) ||
@@ -77,18 +77,18 @@ console.log(info);
 
 
     } catch (error) {
-        console.error('error sendign email:', error);
+        // console.error('error sendign email:', error);/
 
     }
 
 }
 export const verifyEmail = async (req: Request, res: Response) => {
     try {
-       console.log('hi');
+    //    console.log('hi');
        
         const userId = req.params.id
         
-        console.log(userId);
+        // console.log(userId);
         
         const updateInfo = await userModel.updateOne({ _id: userId}, { $set: { isMailvarified: true } })
         if (updateInfo) {
@@ -96,7 +96,7 @@ export const verifyEmail = async (req: Request, res: Response) => {
         }
 
     } catch (error) {
-       console.error(error);
+    //    console.error(error);
        return res.status(500).json({error:'internal server error'})
        
        

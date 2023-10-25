@@ -69,9 +69,11 @@ export const CategoryByid = async(req:Request,res:Response)=>{
 export const SingleTutor = async(req:Request,res:Response)=>{
 
     try {  
-        const id = req.query.id as string
+        const id = req.params.tutor
+        // console.log(id,'tutor id is here');
+        
         const response = await GetTutor(userRepository)(id)
-        console.log(response,'tutor by id is here');
+        // console.log(response,'tutor by id is here');
         
         if (response) {
             res.status(200).json({response})
@@ -85,7 +87,7 @@ export const CourseByIdTUtor = async(req:Request,res:Response)=>{
     try {
         const id = req.query.id as string
         const response = await courseByTUtor(userRepository)(id)
-        console.log(response,'course by tutor id');
+        // console.log(response,'course by tutor id');
         
         if (response) {
             res.status(200).json({response})
@@ -98,10 +100,10 @@ export const CourseByIdTUtor = async(req:Request,res:Response)=>{
 export const findCoursebycategory = async(req:Request,res:Response)=>{
     try {
         const categoryid = req.params.id as string
-        console.log(categoryid,'category id got here');
+        // console.log(categoryid,'category id got here');
         
         const response = await findCoursebyCategory(userRepository)(categoryid)
-        console.log(response,'respnse got ere');
+        // console.log(response,'respnse got ere');
         
         res.status(200).json(response)
     } catch (error:any) {

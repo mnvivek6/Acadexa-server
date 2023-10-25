@@ -22,7 +22,7 @@ export const PurchasedCourse =(userRepository:userRepository)=>{
 export const Checkingpurchasedornot = (userRepository:userRepository)=>{
     return async(courseid:string,userid:string):Promise<Payment|null>=>{
              const response = await userRepository.findCourseByuserandcourse(courseid,userid)
-             console.log(response,'find course by use and cosurse');
+            //  console.log(response,'find course by use and cosurse');
              
              return response
     }

@@ -18,12 +18,12 @@ export const SearchCourseFilterSort = async (req: Request, res: Response) => {
 
     let filterData;
 
-    if (req.query.input) filterData =  { $regex: req.query.input, $options: 'i' } ;
+    // if (req.query.input) filterData =  { $regex: req.query.input, $options: 'i' } ;
     
-    console.log(req.query.input);
+       filterData =req.query.input as string
     console.log(filterData);
 
-    const response = await Searchcoursefiltersort(userRepository)(filterData as object, sortCriteria);
+    const response = await Searchcoursefiltersort(userRepository)(filterData , sortCriteria);
 
     console.log(response, 'response from backend');
 

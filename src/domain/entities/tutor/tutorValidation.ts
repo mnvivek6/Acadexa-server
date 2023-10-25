@@ -14,6 +14,7 @@ export type Tutor = {
     qualification:string
     certificate:string
     experience:object
+    verify:boolean
    
 }
 

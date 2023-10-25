@@ -9,6 +9,9 @@ const PaymentSchema = new Schema<Payment>({
     tutor:{type:mongoose.Schema.Types.ObjectId,ref:'tutor'},
     user:{type:mongoose.Schema.Types.ObjectId,ref:'user'},
     course:{type:mongoose.Schema.Types.ObjectId,ref:'course'},
-})
+},{
+    timestamps:{createdAt:true} // to add created_at and updated at field in schema
+}
+)
 
 export const paymentModel:mongoDBPayment = mongoose.connection.model<Document<any,any,any>&Payment>('payment',PaymentSchema)

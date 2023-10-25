@@ -69,12 +69,12 @@ export const Chekingpurchased = async(req:IDRequest,res:Response)=>{
         console.log('checking the fuunction ');
         
         const userid = req.user.user._id
-        console.log(userid);
+        // console.log(userid);
         const courseid = req.params.courseid
-        console.log(courseid);
+        // console.log(courseid);
 
         const response = await Checkingpurchasedornot(userRepository)(courseid,userid)
-        console.log(response,'response is here');
+        // console.log(response,'response is here');
         
         res.status(200).json(response)
     } catch (error:any) {

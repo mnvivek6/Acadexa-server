@@ -12,5 +12,10 @@ export const ViewProfile = (tutorRepository:tutorRepository)=>
      async(tutorId:string):Promise<object|null>=>{
      const tutor = await tutorRepository.getProfile(tutorId)
      return  tutor
-    }
+}
 
+export const Tutorverification = (tutorRepository:tutorRepository)=>
+      async(verificationData:object,tutorid:string)=>{
+        const response = tutorRepository.TutorVerification(verificationData,tutorid)
+        return response
+}

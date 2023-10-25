@@ -24,15 +24,15 @@ const verifyToken = (authHeader: string|string[]|undefined,secretekey:Secret | G
           }
           // Verify the JWT token
          const token:string = req.headers.user as string
-         console.log(token,'sdfasdfsfdsfdfasdfsfsdfsdfsfsdf');
+        //  console.log(token,'sdfasdfsfdsfdfasdfsfsdfsdfsfsdf');
          
          const splitedToken:string = token.split(' ')[1] 
          const tokenWithoutQuotes = splitedToken.replace(/"/g, '');
-          console.log(tokenWithoutQuotes,'splited token is here');
+          // console.log(tokenWithoutQuotes,'splited token is here');
           
           jwt.verify(tokenWithoutQuotes,secretekey , async(err: any | null, decode: any) => {
             if (err) {
-                console.log(err);
+                // console.log(err);
                 
               return res.status(403).json({ error: 'Invalid token' });
             }
@@ -57,7 +57,7 @@ const verifyToken = (authHeader: string|string[]|undefined,secretekey:Secret | G
 
 export const userAuthToken = (req: Request, res:Response, next: NextFunction) => {
     const authHeader: string | string[] | undefined = req.headers.user;
-   console.log(authHeader,'auth header from user auth side');
+  //  console.log(authHeader,'auth header from user auth side');
    
     verifyToken(authHeader, userSecretekey, req, res, next);
   };
