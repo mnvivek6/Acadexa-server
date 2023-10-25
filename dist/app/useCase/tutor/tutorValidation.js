@@ -33,7 +33,7 @@ const createToken = (tutor) => {
     if (!secreteKey) {
         throw new Error('no secret key found');
     }
-    const token = jsonwebtoken_1.default.sign({ tutor }, secreteKey, { expiresIn: '1h' });
+    const token = jsonwebtoken_1.default.sign({ tutor }, secreteKey, { expiresIn: '1day' });
     return token;
 };
 exports.createToken = createToken;

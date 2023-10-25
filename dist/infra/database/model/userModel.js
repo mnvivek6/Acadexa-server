@@ -33,5 +33,6 @@ const UserSchema = new mongoose_1.Schema({
     isBlocked: { type: Boolean, default: false },
     isMailvarified: { type: Boolean, default: false },
     isPremium: { type: Boolean, default: false },
+    image: { type: String }
 });
 exports.userModel = mongoose_1.default.connection.model('user', UserSchema);

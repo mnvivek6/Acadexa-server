@@ -47,7 +47,7 @@ const userRepository = (0, userRepository_1.default)(db);
 const userSignup = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const user = req.body;
-        console.log(user);
+        // console.log(user);
         if (!user.name || !user.email || !user.password || /^\s*$/.test(user.name) ||
             /^\s*$/.test(user.email) ||
             /^\s*$/.test(user.password)) {
@@ -95,24 +95,21 @@ const sendverifyEmail = (name, email, user_id) => __awaiter(void 0, void 0, void
         console.log(info);
     }
     catch (error) {
-        console.error('error sendign email:', error);
+        // console.error('error sendign email:', error);/
     }
 });
 const verifyEmail = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        console.log('hi');
+        //    console.log('hi');
         const userId = req.params.id;
-        console.log(userId);
+        // console.log(userId);
         const updateInfo = yield userModel_1.userModel.updateOne({ _id: userId }, { $set: { isMailvarified: true } });
         if (updateInfo) {
             return res.json({ messsage: 'Email verification successful', updateInfo });
         }
-        else {
-            return res.status(404).json({ error: 'user not found' });
-        }
     }
     catch (error) {
-        console.error(error);
+        //    console.error(error);
         return res.status(500).json({ error: 'internal server error' });
     }
 });

@@ -20,12 +20,14 @@ const db = tutorModel_1.tutorModel;
 const tutorRepository = (0, tutorRepository_1.default)(db);
 const tutorProfile = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const tutorId = req.query.Id;
+        const tutorId = req.tutor.tutor._id;
+        console.log(tutorId);
         const data = req.body;
+        console.log(data, 'here we get the data');
         const tutorData = {
-            skill: data.skill,
+            qualification: data.qualification,
             experience: data.experience,
-            aboutme: data.aboutme,
+            aboutme: data.about
         };
         const createdProfile = yield (0, profileSetup_1.SetupProfile)(tutorRepository)(tutorId, tutorData);
         if (createdProfile) {

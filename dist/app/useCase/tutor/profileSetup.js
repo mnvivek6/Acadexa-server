@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ViewProfile = exports.SetupProfile = void 0;
+exports.Tutorverification = exports.ViewProfile = exports.SetupProfile = void 0;
 const SetupProfile = (tutorRepository) => {
     return (tutorId, tutorDetails) => __awaiter(void 0, void 0, void 0, function* () {
         const tutor = yield tutorRepository.setUpProfile(tutorId, tutorDetails);
@@ -22,3 +22,8 @@ const ViewProfile = (tutorRepository) => (tutorId) => __awaiter(void 0, void 0, 
     return tutor;
 });
 exports.ViewProfile = ViewProfile;
+const Tutorverification = (tutorRepository) => (verificationData, tutorid) => __awaiter(void 0, void 0, void 0, function* () {
+    const response = tutorRepository.TutorVerification(verificationData, tutorid);
+    return response;
+});
+exports.Tutorverification = Tutorverification;

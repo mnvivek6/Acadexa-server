@@ -21,7 +21,9 @@ const db = tutorModel_1.tutorModel;
 const tutorRepository = (0, tutorRepository_1.default)(db);
 const tutorLogin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
+        console.log('sdfgsdgdsfgsdfgdfgdfgdfgdsfgdsfgdsgdsfgdfgsdfgsdf');
         const tutor = req.body;
+        console.log(tutor);
         const { email, password } = tutor;
         if (!email || !password || /^\s*$/.test(email) || /^\s*$/.test(password)) {
             throw new error_1.AppError('All fields are required', 400);

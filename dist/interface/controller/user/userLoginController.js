@@ -22,14 +22,14 @@ const userRepository = (0, userRepository_1.default)(db);
 const userLogin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const user = req.body;
-        console.log(user);
+        // console.log(user);
         const { email, password } = user;
         if (!email || !password || /^\s*$/.test(email) || /^\s*$/.test(password)) {
             throw new error_1.AppError('All fields are required', 400);
         }
         const userToken = yield (0, userLogin_1.loginUser)(userRepository)(user);
-        console.log(userToken);
-        res.status(200).json({ message: userToken });
+        // console.log(userToken,'token is here in backend');
+        res.status(200).json({ userToken });
     }
     catch (error) {
         res.status(error.statusCode || 500).json({ message: error.message || 'something went wrong' });
