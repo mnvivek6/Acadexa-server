@@ -6,7 +6,7 @@ import { User } from "../../domain/entities/user/userValidation"
 
 require('dotenv').config()
 
-const userSecretekey:string = process.env.USER_SECRET_KEY as string
+const userSecretekey:string = 'Studentsecretkey' as string
 export interface IDRequest extends Request {
     user?: any
   }
