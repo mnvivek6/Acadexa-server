@@ -21,7 +21,7 @@ app.use((0, morgan_1.default)('dev'));
 app.use(body_parser_1.default.json());
 app.use(body_parser_1.default.urlencoded({ extended: false }));
 dotenv_1.default.config();
-(0, dbConfig_1.default)(process.env.MONGODB_CONNECTION_URL || '');
+(0, dbConfig_1.default)("mongodb+srv://mvivekmn:1234@cluster0.kb2qbes.mongodb.net/acadexa?retryWrites=true&w=majority");
 //setup routes
 app.use('/', user_1.default);
 app.use('/admin', admin_1.default);
