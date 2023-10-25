@@ -11,14 +11,13 @@ const CourseSchema = new Schema<Course>({
     unlist:{type:Boolean,default:false},
     level:{type:String, enum:['beginner','advanced','intermediate']},
     coursefee:{type:String, required:true},
-    tutor:{type:mongoose.Schema.Types.ObjectId,ref:'Tutor'},
-    category:{type:mongoose.Schema.Types.ObjectId, ref:'Category'},
+    tutor:{type:mongoose.Schema.Types.ObjectId,ref:'tutor'},
+    category:{type:mongoose.Schema.Types.ObjectId, ref:'category'},
     classes:[{
         title:{type:String},
         description:{type:String},
-        vedeo:{type:String}
+        video:{type:String}
     }]
-
 },{
     timestamps:{createdAt:true}
 })

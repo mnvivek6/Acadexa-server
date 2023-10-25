@@ -2,6 +2,7 @@ import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
 import dotenv from "dotenv"
 import path from "path"
+import { User } from "../../../domain/entities/user/userValidation"
 
 dotenv.config({path:path.resolve(__dirname,'../.env')})
 
@@ -13,7 +14,7 @@ export const passwordCompare:Function = async(plainTextPassword:string,hashedPas
     const password:boolean = await bcrypt.compare(plainTextPassword,hashedPassword)
     return password
 }
-export const createToken = (user: string): string => {
+export const createToken = (user: User): string => {
     console.log(user,'inner side');
     
     const secreteKey: string | undefined = process.env.USER_SECRET_KEY;

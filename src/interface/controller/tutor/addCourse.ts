@@ -2,9 +2,10 @@ import { Request, Response } from "express";
 import { tutorModel } from "../../../infra/database/model/tutorModel";
 import tutorRepositoryImp from "../../../infra/repositories/tutor/tutorRepository";
 import { Course } from "../../../domain/entities/tutor/course";
-import { AddCourse, GetCourse } from "../../../app/useCase/tutor/addCourse";
+import { AddCourse, GetCourse, SigleCourse } from "../../../app/useCase/tutor/addCourse";
 import { CustomRequest } from "../../middlewares/authMiddleware";
 import { categoryModel } from "../../../infra/database/model/categoryModel";
+
 
 const db = tutorModel
 
@@ -43,13 +44,32 @@ export const CreateCourse = async (req:CustomRequest , res:Response)=>{
     }
 }
 
-export const AllCourses = async(req:Request,res:Response)=>{
+export const AllCourses = async(req:CustomRequest,res:Response)=>{
     try {
+        const id = req.tutor.tutor._id
+        console.log(id,'tutor id is hereeeeeeeeeeee');
         
-        const allCourses = await GetCourse(tutorRepository)()
+        const allCourses = await GetCourse(tutorRepository)(id)
         if (allCourses) {
             res.status(200).json({message:allCourses})
         }
+    } catch (error:any) {
+        res.status(500).json({message:error.message||' something went wrong'})
+    }
+}
+
+export const SigleCourseById = async(req:Request,res:Response)=>{
+
+
+    console.log('log from sigle course by id');
+    
+    try {
+        const id :string= req.params.id as string
+        const singleCourse:Course|null = await SigleCourse(tutorRepository)(id)
+
+        if (singleCourse) {
+            res.status(200).json({singleCourse})
+        } 
     } catch (error:any) {
         res.status(500).json({message:error.message||' something went wrong'})
     }

@@ -2,20 +2,19 @@ import { Request, Response } from "express";
 import { userModel } from "../../../infra/database/model/userModel";
 import userRepositoryImp, { userRepository } from "../../../infra/repositories/user/userRepository";
 import { AppError } from "../../../untils/error";
-import { getUserById, getUsers, isBlockUser } from "../../../app/useCase/admin/getUsers";
+import { getUserById, getUserBySearch, getUsers, isBlockUser } from "../../../app/useCase/admin/getUsers";
+import adminRepositoryImp from "../../../infra/repositories/admin/adminRepository";
+import { adminModel } from "../../../infra/database/model/adminModel";
 
 
 
 const db = userModel
 const userRepository = userRepositoryImp(db)
+const adminRepository = adminRepositoryImp(adminModel)
 
 export const getAllUsers = async(req:Request,res:Response)=>{
     try {
-        console.log('hi get all users');
-        
-        const allUsers = await getUsers (userRepository)()
-        console.log(allUsers,'got all users here');
-        
+        const allUsers = await getUsers (userRepository)()    
         if (!allUsers) {
             throw new AppError("something went wrong ",400)
         }
@@ -59,6 +58,22 @@ export const BlockUser = async(req:Request,res:Response)=>{
         res.json(blockeduser)
 
         
+    } catch (error:any) {
+        res.status(error.statusCode||500).json({message:error.message||"something went wrong"})
+    }
+}
+
+export const SearchUserByName = async(req:Request,res:Response)=>{
+
+    try {
+        
+        let searchQuery = req.query.value as string
+    console.log(searchQuery,'qwertyuiop');
+
+    const response = await getUserBySearch(adminRepository)(searchQuery)
+    console.log(response,'responses are here');
+    
+    res.status(200).json(response)
     } catch (error:any) {
         res.status(error.statusCode||500).json({message:error.message||"something went wrong"})
     }

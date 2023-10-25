@@ -14,6 +14,6 @@ export type Course ={
     classes:[{
         title:string,
         description: string;
-        vedeo:string
+        video:string
     }]
 }

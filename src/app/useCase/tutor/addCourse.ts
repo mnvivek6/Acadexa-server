@@ -10,12 +10,18 @@ export const AddCourse = (tutorRepository:tutorRepository)=>{
 
 export const GetCourse = (tutorRepositoty:tutorRepository)=>
 
-
-     async ():Promise<object[]>=>{
+     async (id:string):Promise<object[]>=>{
         console.log('get course');
-        
-        const courses = await tutorRepositoty.getAllCourses()
+        const courses = await tutorRepositoty.getAllCourses(id)
         console.log(courses,'coures from ');
         
         return courses
 }
+
+export const SigleCourse =(tutorRepository:tutorRepository)=>
+
+    async (id:string):Promise<Course>=>{
+        const siglecourse:Course = await tutorRepository.GetSigleCourse(id)
+
+        return siglecourse
+    }

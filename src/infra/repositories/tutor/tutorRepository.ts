@@ -1,6 +1,8 @@
+import { category } from "../../../domain/entities/tutor/category";
 import { Course } from "../../../domain/entities/tutor/course";
 import { Tutor } from "../../../domain/entities/tutor/tutorValidation";
 import { AppError } from "../../../untils/error";
+import { categoryModel } from "../../database/model/categoryModel";
 import { courseModel } from "../../database/model/courseModel";
 import { mongoDBTutor, tutorModel } from "../../database/model/tutorModel";
 
@@ -26,7 +28,11 @@ export type tutorRepository ={
     getProfile:(id:string)=>Promise<object|null>
     getAllTutors:()=>Promise<object[]>
     addCourse:(Course:object)=>Promise<Course>
-    getAllCourses:()=>Promise<object[]>
+    getAllCourses:(id:string)=>Promise<object[]>
+    GetSigleCourse:(id:string)=>Promise<Course>
+    createClass:(id:string,classDetails:object)=>Promise<Course>
+
+   
 }
 
 const tutorRepositoryImp =(TutorModel:mongoDBTutor):tutorRepository=>{
@@ -73,13 +79,31 @@ const tutorRepositoryImp =(TutorModel:mongoDBTutor):tutorRepository=>{
 
         return addedCourse
     }
-    const getAllCourses = async():Promise<object[]>=>{
-        const allCourses:object[] = await courseModel.find()
+    const getAllCourses = async(id:string):Promise<object[]>=>{
+        const allCourses:object[] = await courseModel.find({tutor:id})
         if(!allCourses){throw new Error ('Something Went Wrong')}
         console.log(allCourses,'get all courses ');
-        
         return allCourses
     }
-    return {createTutor,findTutorByEmail,setUpProfile,getProfile,getAllTutors,addCourse,getAllCourses}
+    const GetSigleCourse= async(id:string):Promise<Course>=>{
+        const course:Course|null = await courseModel.findById({_id:id})
+        if ( !course ) throw new AppError ("No Course Found",500)
+        return course
+    }
+    const createClass = async (id: string, ClassDetails: object): Promise<Course> => {
+        try {
+            console.log(ClassDetails,'class details are here');
+            
+          const updatedCourse = await courseModel.findByIdAndUpdate(id,{ $push: { classes: ClassDetails, }, }, { new: true,upsert: true, });
+      
+          return updatedCourse;
+        } catch (error) {
+          // Handle any errors here
+          console.error(error);
+          throw error;
+        }
+    };
+ 
+    return {createTutor,findTutorByEmail,setUpProfile,getProfile,getAllTutors,addCourse,getAllCourses,GetSigleCourse,createClass}
 }
 export default tutorRepositoryImp
