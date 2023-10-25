@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.userAuthToken = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 require('dotenv').config();
-const userSecretekey = process.env.USER_SECRET_KEY;
+const userSecretekey = 'Studentsecretkey';
 const verifyToken = (authHeader, secretekey, req, res, next) => {
     try {
         if (!authHeader || !secretekey) {

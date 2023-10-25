@@ -5,9 +5,9 @@ import jwt from 'jsonwebtoken'
 
 require('dotenv').config()
 
-const userSecretekey:string = process.env.USER_SECRET_KEY as string
-const adminSecretekey:string = process.env.ADMIN_SECRET_KEY as string
-const tutorSecretekey:string = process.env.TUTOR_SECRET_KEY as string
+const userSecretekey:string = 'Studentsecretkey' as string
+const adminSecretekey:string = 'AdMiNsEcReTkEy' as string
+const tutorSecretekey:string = 'TuToRsEcReTkEy'as string
 
 
 export interface CustomRequest extends Request {
