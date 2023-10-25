@@ -18,7 +18,7 @@ export const userLogin = async ( req:Request,res:Response)=>{
     try {
 
         const user:User = req.body
-        console.log(user);
+        // console.log(user);
         
 
         const {email,password}= user
@@ -28,7 +28,7 @@ export const userLogin = async ( req:Request,res:Response)=>{
         }
          
         const userToken = await loginUser(userRepository)(user)
-        console.log(userToken,'token is here in backend');
+        // console.log(userToken,'token is here in backend');
         
         res.status(200).json({userToken})
 

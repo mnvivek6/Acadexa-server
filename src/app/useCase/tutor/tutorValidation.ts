@@ -2,6 +2,7 @@ import dotenv from "dotenv"
 import bcrypt from "bcrypt"
 import jwt from 'jsonwebtoken'
 import path from "path"
+import { Tutor } from "../../../domain/entities/tutor/tutorValidation"
 
 
 dotenv.config({path:path.resolve(__dirname,'../.env')})
@@ -21,7 +22,8 @@ export const createToken = (tutor:object):string =>{
     const secreteKey:string|undefined = process.env.TUTOR_SECRET_KEY
     if(!secreteKey){throw new Error('no secret key found')}
 
-    const token = jwt.sign({tutor},secreteKey as string,{expiresIn:'1h'})
+    const token = jwt.sign({tutor},secreteKey as string,{expiresIn:'1day'})
 
     return token
 }
+

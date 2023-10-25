@@ -15,10 +15,10 @@ export const passwordCompare:Function = async(plainTextPassword:string,hashedPas
     return password
 }
 export const createToken = (user: User): string => {
-    console.log(user,'inner side');
+    // console.log(user,'inner side');
     
     const secreteKey: string | undefined = process.env.USER_SECRET_KEY;
-    console.log(secreteKey,'generated success fully');
+    // console.log(secreteKey,'generated success fully');
     
 
     if (!secreteKey) {
@@ -26,7 +26,7 @@ export const createToken = (user: User): string => {
     }
 
 
-    const token = jwt.sign({user},secreteKey as string, {expiresIn:'1h'})
+    const token = jwt.sign({user},secreteKey as string, {expiresIn:'1day'})
     console.log(token);
     return token
     

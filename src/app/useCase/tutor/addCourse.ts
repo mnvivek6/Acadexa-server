@@ -1,5 +1,8 @@
 import { Course } from "../../../domain/entities/tutor/course";
-import { tutorRepository } from "../../../infra/repositories/tutor/tutorRepository";
+import { Payment } from "../../../domain/entities/tutor/payment";
+import { User } from "../../../domain/entities/user/userValidation";
+import tutorRepositoryImp, { tutorRepository } from "../../../infra/repositories/tutor/tutorRepository";
+// import { tutorAuthToken } from "../../../interface/middlewares/authMiddleware";
 
 export const AddCourse = (tutorRepository:tutorRepository)=>{
     
@@ -25,3 +28,21 @@ export const SigleCourse =(tutorRepository:tutorRepository)=>
 
         return siglecourse
     }
+
+    export const purchasedusers = (tutorRepository:tutorRepository)=>
+    async(courseid:string):Promise<User[]|undefined>=>{
+        const users:User[]|undefined = await tutorRepository.purchasedTutors(courseid)
+        return users
+    }
+
+    export const totalrevenue = (tutorRepository:tutorRepository)=>
+      async(tutorid:string):Promise<Payment[]|undefined>=>{
+        const revenue :Payment[]|undefined = await tutorRepository.TotalRevenue(tutorid)
+        return revenue;
+      }
+
+      export const categorywiserevenue = (tutorRepository:tutorRepository)=>
+       async():Promise<object[]|null>=>{
+        const data=await tutorRepository.CategoryWiseRevenue()
+        return data
+       }

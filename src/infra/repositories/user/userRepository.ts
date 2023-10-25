@@ -38,14 +38,14 @@ export type userRepository={
     EditProfile:(id:string,userDetails:userDetails)=>Promise<User|null>
     CoursePurchase:(purchaseDetails:Payment)=>Promise<Payment>
     PurchaseCourse:(id:string)=>Promise<Object|undefined>
-    CourseSearchSortFilter:(filters:object,sortCritirea:object)=>Promise<Course[]>
+    CourseSearchSortFilter:(filters:string,sortCritirea:object)=>Promise<Course[]|null>
     findCourseByuserandcourse:(courseid:string,userid:string)=>Promise<Payment|null>
     findCourseByCategory(categoryid:string):Promise<Course[]|undefined>
 }
 const userRepositoryImp = (UserModel: MongoDBUser): userRepository => {
 
     const createUser = async(user:User):Promise<User>=>{
-        console.log(user,'repository'); 
+        // console.log(user,'repository'); 
         let newUser = await UserModel.create(user)
         return newUser
     }
@@ -87,7 +87,7 @@ const userRepositoryImp = (UserModel: MongoDBUser): userRepository => {
        return courses
     }
     const GetCourseById = async(id:string):Promise<Course|null>=>{
-        const course:Course|null = await courseModel.findById({_id:id})
+        const course:Course|null = await courseModel.findById({_id:id}).populate('tutor')
         return course
     }
     const GetTutorById = async(id:string|undefined):Promise<Tutor|null>=>{
@@ -100,7 +100,7 @@ const userRepositoryImp = (UserModel: MongoDBUser): userRepository => {
     }
     const GetProfile = async(id:string):Promise<User|null>=>{
         const profile:User|null = await userModel.findById({_id:id})
-        console.log(profile,'user profile is inside');
+        // console.log(profile,'user profile is inside');
         return profile
     }
     const findBlockedUser = async(email:string):Promise<boolean>=>{
@@ -138,15 +138,17 @@ const userRepositoryImp = (UserModel: MongoDBUser): userRepository => {
         if(!purchasedcourse)throw new AppError('write error',404)
         return purchasedcourse
       }
-    const CourseSearchSortFilter = async(filters:object,sortCritirea:any):Promise<Course[]>=>{
-        const response:Course[] = await courseModel.find(filters).sort(sortCritirea)
-        console.log(response,'response is here in repositories');
+    const CourseSearchSortFilter = async(filters:string,sortCritirea:any):Promise<Course[]|null>=>{
+        console.log(filters,'search query is here in backend repository');
+        
+        const response:Course[] = await courseModel.find({title:{$regex:filters,$options:'i'}}).sort(sortCritirea)
+        // console.log(response,'response is here in repositories');
         
         return response 
     }  
     const findCourseByuserandcourse = async(courseid:string,userid:string):Promise<Payment|null>=>{
         const response:Payment|null = await paymentModel.findOne({course:courseid,user:userid})
-        console.log(response,'response here in the repository');
+        // console.log(response,'response here in the repository');
         
         return response
     }

@@ -28,8 +28,8 @@ const verifyToken = (authHeader: string|string[]|undefined,secretekey:Secret | G
           }
           // Verify the JWT token
          const token:string = req.headers.tutor as string
-         console.log(token);
-         
+        //  console.log(token);
+        //  
          const splitedToken:string = token.split(' ')[1] 
           
           jwt.verify(splitedToken,secretekey , async(err: any | null, decode: any) => {
@@ -37,7 +37,7 @@ const verifyToken = (authHeader: string|string[]|undefined,secretekey:Secret | G
               return res.status(403).json({ error: 'Invalid token' });
             }
             if (decode) {
-              console.log(decode,'decoded user is here');
+              // console.log(decode,'decoded user is here');
               
               
                 (req as MyRequest).tutor = decode;
@@ -58,14 +58,14 @@ const verifyToken = (authHeader: string|string[]|undefined,secretekey:Secret | G
 }
 export const userAuthToken = (req: Request, res:Response, next: NextFunction) => {
   const authHeader: string | string[] | undefined = req.headers.user;
- console.log(authHeader,'auth header from user auth side');
+//  console.log(authHeader,'auth header from user auth side');
  
   verifyToken(authHeader, userSecretekey, req, res, next);
 };
 
  export const adminAuthToken =(req:CustomRequest,res:Response, next:NextFunction)=>{
     const authHeader:any|string[]|undefined=req.headers
-      console.log(authHeader,'auth headers from admin side');
+      // console.log(authHeader,'auth headers from admin side');
       
     verifyToken(authHeader ,adminSecretekey  , req, res,next )
 }

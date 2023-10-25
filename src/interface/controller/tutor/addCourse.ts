@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { tutorModel } from "../../../infra/database/model/tutorModel";
 import tutorRepositoryImp from "../../../infra/repositories/tutor/tutorRepository";
 import { Course } from "../../../domain/entities/tutor/course";
-import { AddCourse, GetCourse, SigleCourse } from "../../../app/useCase/tutor/addCourse";
+import { AddCourse, GetCourse, SigleCourse, purchasedusers, totalrevenue } from "../../../app/useCase/tutor/addCourse";
 import { CustomRequest } from "../../middlewares/authMiddleware";
 import { categoryModel } from "../../../infra/database/model/categoryModel";
 
@@ -50,6 +50,8 @@ export const AllCourses = async(req:CustomRequest,res:Response)=>{
         console.log(id,'tutor id is hereeeeeeeeeeee');
         
         const allCourses = await GetCourse(tutorRepository)(id)
+        
+        
         if (allCourses) {
             res.status(200).json({message:allCourses})
         }
@@ -70,6 +72,30 @@ export const SigleCourseById = async(req:Request,res:Response)=>{
         if (singleCourse) {
             res.status(200).json({singleCourse})
         } 
+    } catch (error:any) {
+        res.status(500).json({message:error.message||' something went wrong'})
+    }
+}
+export const PurchasedUsers = async(req:Request,res:Response)=>{
+
+    try {
+        const courseid :string = req.params.id as string
+        console.log(courseid,'course id is here');
+        
+        const response = await purchasedusers(tutorRepository)(courseid)
+        console.log(response,'response herer');
+        
+        res.status(200).json(response)
+    } catch (error:any) {
+        res.status(500).json({message:error.message||' something went wrong'})
+    }
+}
+export const TotalRevenue = async(req:CustomRequest,res:Response)=>{
+    try {
+        
+        const tutorid = req.tutor.tutor._id
+        const response = await totalrevenue(tutorRepository)(tutorid)
+        res.status(200).json(response)
     } catch (error:any) {
         res.status(500).json({message:error.message||' something went wrong'})
     }

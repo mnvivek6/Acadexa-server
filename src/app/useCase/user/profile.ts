@@ -7,9 +7,9 @@ export const UserProfile = (userRepository:userRepository)=>
 
     async(id:string):Promise<User|null>=>{
 
-        console.log('log from inside userPrfile');
+        // console.log('log from inside userPrfile');
        const user =  await userRepository.GetProfile(id)
-       console.log(user);
+      //  console.log(user);
        
     return user
     

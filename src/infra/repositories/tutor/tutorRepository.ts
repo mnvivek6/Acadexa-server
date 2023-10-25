@@ -1,9 +1,12 @@
 import { category } from "../../../domain/entities/tutor/category";
 import { Course } from "../../../domain/entities/tutor/course";
+import { Payment } from "../../../domain/entities/tutor/payment";
 import { Tutor } from "../../../domain/entities/tutor/tutorValidation";
+import { User } from "../../../domain/entities/user/userValidation";
 import { AppError } from "../../../untils/error";
 import { categoryModel } from "../../database/model/categoryModel";
 import { courseModel } from "../../database/model/courseModel";
+import { paymentModel } from "../../database/model/paymentModel";
 import { mongoDBTutor, tutorModel } from "../../database/model/tutorModel";
 
 
@@ -31,8 +34,10 @@ export type tutorRepository ={
     getAllCourses:(id:string)=>Promise<object[]>
     GetSigleCourse:(id:string)=>Promise<Course>
     createClass:(id:string,classDetails:object)=>Promise<Course>
-
-   
+    purchasedTutors:(courseid:string)=>Promise<User[]|undefined>
+    TutorVerification:(verificationData:object,tutorid:string)=>Promise<Tutor|undefined>
+    TotalRevenue:(tutorid:string)=>Promise<Payment[]|undefined>
+    CategoryWiseRevenue:()=>Promise<object[]|null>
 }
 
 const tutorRepositoryImp =(TutorModel:mongoDBTutor):tutorRepository=>{
@@ -103,7 +108,43 @@ const tutorRepositoryImp =(TutorModel:mongoDBTutor):tutorRepository=>{
           throw error;
         }
     };
- 
-    return {createTutor,findTutorByEmail,setUpProfile,getProfile,getAllTutors,addCourse,getAllCourses,GetSigleCourse,createClass}
+    const purchasedTutors = async(courseid:string):Promise<User[]|undefined>=>{
+        try {
+            const purchasedusers:User[]|null = await paymentModel.find({course:courseid}).populate('user').populate('course')
+                  console.log(purchasedusers,'purchased users is here');
+                  
+            return purchasedusers
+        } catch (error) {
+            throw error
+        }
+    }
+    const TutorVerification = async(verificationData:object,tutorid:string):Promise<Tutor|undefined>=>{
+        try {
+            const updatedTutor:any = await tutorModel.findByIdAndUpdate(tutorid, { $set: verificationData },  { new: true } );
+              return updatedTutor
+        } catch (error) {
+            throw error
+        }
+    }
+    const TotalRevenue = async(tutorid:string):Promise<Payment[]|undefined>=>{
+        try {
+            const paymentDetails:any = await paymentModel.find({tutor:tutorid})
+            return paymentDetails
+        } catch (error) {
+            throw error
+        }
+    }
+    const CategoryWiseRevenue = async():Promise<object[]|null>=>{
+        try {
+            const courses = await courseModel.find({}).populate('category') 
+            const categories = await categoryModel.find({})
+            return [courses,categories]
+        } catch (error) {
+            throw error
+        }
+    }
+    return {CategoryWiseRevenue,TotalRevenue,TutorVerification,purchasedTutors,
+             createTutor,findTutorByEmail,setUpProfile,getProfile,getAllTutors,
+             addCourse,getAllCourses,GetSigleCourse,createClass}
 }
 export default tutorRepositoryImp

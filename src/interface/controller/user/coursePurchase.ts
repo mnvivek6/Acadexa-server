@@ -29,7 +29,7 @@ export const Paymentdetails = async(req:IDRequest,res:Response)=>{
      }
    
    const response = await PaymentUpdate(userRepository)(purChaseData)
-   console.log(response,'response form backend');
+  //  console.log(response,'response form backend');
   } catch (error) {
    
     
