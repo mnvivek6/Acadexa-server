@@ -22,7 +22,7 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended:false }))
 
 dotenv.config();
-connectDB(process.env.MONGODB_CONNECTION_URL||'');
+connectDB("mongodb+srv://mvivekmn:1234@cluster0.kb2qbes.mongodb.net/acadexa?retryWrites=true&w=majority");
 
 //setup routes
 app.use('/',userRoute);
