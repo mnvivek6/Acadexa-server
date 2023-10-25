@@ -29,13 +29,13 @@ const passwordCompare = (plainTextPassword, hashedPassword) => __awaiter(void 0,
 });
 exports.passwordCompare = passwordCompare;
 const createToken = (user) => {
-    console.log(user, 'inner side');
+    // console.log(user,'inner side');
     const secreteKey = process.env.USER_SECRET_KEY;
-    console.log(secreteKey, 'generated success fully');
+    // console.log(secreteKey,'generated success fully');
     if (!secreteKey) {
         throw new Error('JWT secret key is not defined');
     }
-    const token = jsonwebtoken_1.default.sign({ user }, secreteKey, { expiresIn: '1h' });
+    const token = jsonwebtoken_1.default.sign({ user }, secreteKey, { expiresIn: '1day' });
     console.log(token);
     return token;
 };

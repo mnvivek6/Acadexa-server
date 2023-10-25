@@ -25,13 +25,15 @@ const verifyToken = (authHeader, secretekey, req, res, next) => {
         }
         // Verify the JWT token
         const token = req.headers.tutor;
-        console.log(token);
+        //  console.log(token);
+        //  
         const splitedToken = token.split(' ')[1];
         jsonwebtoken_1.default.verify(splitedToken, secretekey, (err, decode) => __awaiter(void 0, void 0, void 0, function* () {
             if (err) {
                 return res.status(403).json({ error: 'Invalid token' });
             }
             if (decode) {
+                // console.log(decode,'decoded user is here');
                 req.tutor = decode;
                 next();
                 // Assuming you want to assign the decoded value to req.tutor            
@@ -48,12 +50,13 @@ const verifyToken = (authHeader, secretekey, req, res, next) => {
 };
 const userAuthToken = (req, res, next) => {
     const authHeader = req.headers.user;
+    //  console.log(authHeader,'auth header from user auth side');
     verifyToken(authHeader, userSecretekey, req, res, next);
 };
 exports.userAuthToken = userAuthToken;
 const adminAuthToken = (req, res, next) => {
     const authHeader = req.headers;
-    console.log(authHeader, 'auth headers from admin side');
+    // console.log(authHeader,'auth headers from admin side');
     verifyToken(authHeader, adminSecretekey, req, res, next);
 };
 exports.adminAuthToken = adminAuthToken;

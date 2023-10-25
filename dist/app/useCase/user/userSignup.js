@@ -14,17 +14,17 @@ const error_1 = require("../../../untils/error");
 const userValidationHelper_1 = require("./userValidationHelper");
 const signupUser = (userRepository) => {
     return (user) => __awaiter(void 0, void 0, void 0, function* () {
-        console.log(user, 'usecase');
+        // console.log(user,'usecase');
         const isUserExist = yield userRepository.findOneUserByEmail(user.email);
         if (isUserExist) {
             throw new error_1.AppError('User already exists', 409);
         }
-        console.log(isUserExist, 'not exixt');
+        // console.log(isUserExist,'not exixt');
         const hashpassword = yield (0, userValidationHelper_1.passwordHashing)(user === null || user === void 0 ? void 0 : user.password);
         const newUser = Object.assign(Object.assign({}, user), { password: hashpassword });
-        console.log(newUser, 'new user created');
+        // console.log(newUser, 'new user created');
         const createdUser = yield userRepository.createUser(newUser);
-        console.log(createdUser, 'user created successfully');
+        // console.log(createdUser, 'user created successfully');
         return createdUser;
     });
 };

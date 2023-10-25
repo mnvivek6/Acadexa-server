@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.isBlockUser = exports.getUserById = exports.getUsers = void 0;
+exports.getUserBySearch = exports.isBlockUser = exports.getUserById = exports.getUsers = void 0;
 const getUsers = (userRepository) => () => __awaiter(void 0, void 0, void 0, function* () {
     const users = yield userRepository.getAllUsers();
     return users;
@@ -30,3 +30,8 @@ const isBlockUser = (userRepository) => {
     });
 };
 exports.isBlockUser = isBlockUser;
+const getUserBySearch = (adminRepository) => (searchQuery) => __awaiter(void 0, void 0, void 0, function* () {
+    const response = yield adminRepository.searchUser(searchQuery);
+    return response;
+});
+exports.getUserBySearch = getUserBySearch;

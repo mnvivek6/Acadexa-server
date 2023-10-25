@@ -34,7 +34,14 @@ const TutorSchema = new mongoose_1.Schema({
     isBlocked: { type: Boolean, default: false },
     isMailVerified: { type: Boolean, default: false },
     aboutme: { type: String },
-    category: { type: mongoose_1.default.Schema.Types.ObjectId, ref: 'category' }
+    qualification: { type: String },
+    certificate: { type: String },
+    experience: {
+        year: { type: String },
+        month: { type: String }
+    },
+    category: { type: String },
+    verify: { type: Boolean, default: false }
 }, {
     timestamps: { createdAt: true }
 });
