@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { AllTuTors, SearchTutor, blockedTutor, unverifiedtutors } from "../../../app/useCase/admin/getTutors";
+import { AllTuTors, SearchTutor, blockedTutor, gettutorbyid, unverifiedtutors } from "../../../app/useCase/admin/getTutors";
 import { tutorModel } from "../../../infra/database/model/tutorModel";
 import tutorRepositoryImp from "../../../infra/repositories/tutor/tutorRepository";
 import { AppError } from "../../../untils/error";
@@ -61,6 +61,22 @@ export const unverifiedTutors = async(req:Request, res:Response)=>{
             throw new AppError("something went wronggggg ",400)
         }
       res.status(200).json(response)
+    } catch (error:any) {
+        res.status(error.statusCode||500).json({message:error.message||"something went wrong"})
+    }
+}
+
+export const tutorbyid = async(req:Request,res:Response)=>{
+    try {
+        
+        const tutorid = req.params.tutorid
+          console.log(tutorid);
+          
+        const response = await gettutorbyid(adminRepository)(tutorid)
+        if (!response) {
+            throw new AppError("something went wronggggg ",400)
+        }
+        res.status(200).json(response)
     } catch (error:any) {
         res.status(error.statusCode||500).json({message:error.message||"something went wrong"})
     }

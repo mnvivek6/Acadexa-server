@@ -26,6 +26,7 @@ export type adminRepository = {
     searchTutor:(searchQuery:string)=>Promise<Tutor[]|undefined>
     UpdateIsblocktutor:(tutorid:string, action:string)=>Promise<boolean|undefined>
     UnverifiedTutors:()=>Promise<Tutor[]>
+    getTutorbyid:(tutorid:string)=>Promise<Tutor|undefined>
 }
 
 const adminRepositoryImp = (AdminModel: MongoDBAdmin): adminRepository => {
@@ -119,7 +120,12 @@ const adminRepositoryImp = (AdminModel: MongoDBAdmin): adminRepository => {
         if (!unVerifiedTutors)  throw new AppError("something went wrong while blocking user",500);
         return unVerifiedTutors
     }
-    return {UnverifiedTutors,UpdateIsblocktutor,searchTutor,searchUser, findAdminbyEmail, getAdminById , updateProfileById,Addcategory,getcategory,getCourse,getTutors,editCategory,searchCourse}
+    const getTutorbyid = async(tutorid:string):Promise<Tutor>=>{
+        const tutor = await tutorModel.findOne({_id:tutorid})
+        if(!tutor) throw new AppError("No such Tutor exists!",401);
+        return tutor
+    }
+    return {getTutorbyid,UnverifiedTutors,UpdateIsblocktutor,searchTutor,searchUser, findAdminbyEmail, getAdminById , updateProfileById,Addcategory,getcategory,getCourse,getTutors,editCategory,searchCourse}
 }
 
 export default adminRepositoryImp
