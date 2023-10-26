@@ -58,7 +58,7 @@ export const unverifiedTutors = async(req:Request, res:Response)=>{
         console.log(response,'response form backend');
         
         if (!response) {
-            throw new AppError("something went wronggg ",400)
+            throw new AppError("something went wrongggg ",400)
         }
       res.status(200).json(response)
     } catch (error:any) {
