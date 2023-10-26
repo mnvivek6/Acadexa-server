@@ -1,4 +1,5 @@
 import { Tutor } from "../../../domain/entities/tutor/tutorValidation"
+import { adminModel } from "../../../infra/database/model/adminModel"
 import { adminRepository } from "../../../infra/repositories/admin/adminRepository"
 import { tutorRepository } from "../../../infra/repositories/tutor/tutorRepository"
 
@@ -27,3 +28,9 @@ export const unverifiedtutors = (adminRepository:adminRepository)=>
         const tutors = await adminRepository.UnverifiedTutors()
         return tutors;
       }    
+
+export const gettutorbyid = (adminRepository:adminRepository)=>
+        async(tutorid:string):Promise<Tutor|undefined>=>{
+            const tutor = await adminRepository.getTutorbyid(tutorid)
+            return tutor
+        }      
