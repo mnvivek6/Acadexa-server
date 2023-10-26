@@ -84,7 +84,6 @@ const sendverifyEmail = (name, email, user_id) => __awaiter(void 0, void 0, void
                 pass: 'gklfwccxjdvifomb',
             }
         });
-        console.log(email, "asimmm");
         const mailOptions = {
             from: 'vivekmn04@gmail.com',
             to: email,

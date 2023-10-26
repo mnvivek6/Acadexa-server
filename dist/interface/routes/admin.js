@@ -25,4 +25,5 @@ adminRoute.get('/searchcoursebyname', authMiddleware_1.adminAuthToken, getcourse
 adminRoute.get('/searchuserbyname', authMiddleware_1.adminAuthToken, getUsers_1.SearchUserByName);
 adminRoute.get('/searchtutorbyname', authMiddleware_1.adminAuthToken, getTutors_1.getTutorsbyName);
 adminRoute.post('/blocktutor', authMiddleware_1.adminAuthToken, getTutors_1.tutorBlock);
+adminRoute.get('/unverifiedtutors', authMiddleware_1.adminAuthToken, getTutors_1.unverifiedTutors);
 exports.default = adminRoute;

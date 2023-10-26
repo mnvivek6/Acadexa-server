@@ -101,6 +101,12 @@ const adminRepositoryImp = (AdminModel) => {
         console.log(isBlocked, 'dfsdfsf');
         return isBlocked;
     });
-    return { UpdateIsblocktutor, searchTutor, searchUser, findAdminbyEmail, getAdminById, updateProfileById, Addcategory, getcategory, getCourse, getTutors, editCategory, searchCourse };
+    const UnverifiedTutors = () => __awaiter(void 0, void 0, void 0, function* () {
+        const unVerifiedTutors = yield tutorModel_1.tutorModel.find({ verify: false });
+        if (!unVerifiedTutors)
+            throw new error_1.AppError("something went wrong while blocking user", 500);
+        return unVerifiedTutors;
+    });
+    return { UnverifiedTutors, UpdateIsblocktutor, searchTutor, searchUser, findAdminbyEmail, getAdminById, updateProfileById, Addcategory, getcategory, getCourse, getTutors, editCategory, searchCourse };
 };
 exports.default = adminRepositoryImp;

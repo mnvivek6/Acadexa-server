@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.tutorBlock = exports.getTutorsbyName = exports.getAllTutors = void 0;
+exports.unverifiedTutors = exports.tutorBlock = exports.getTutorsbyName = exports.getAllTutors = void 0;
 const getTutors_1 = require("../../../app/useCase/admin/getTutors");
 const tutorModel_1 = require("../../../infra/database/model/tutorModel");
 const tutorRepository_1 = __importDefault(require("../../../infra/repositories/tutor/tutorRepository"));
@@ -62,3 +62,18 @@ const tutorBlock = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     }
 });
 exports.tutorBlock = tutorBlock;
+const unverifiedTutors = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        console.log('unverified tutors');
+        const response = yield (0, getTutors_1.unverifiedtutors)(adminRepository)();
+        console.log(response, 'response form backend');
+        if (!response) {
+            throw new error_1.AppError("something went wrong ", 400);
+        }
+        res.status(200).json(response);
+    }
+    catch (error) {
+        res.status(error.statusCode || 500).json({ message: error.message || "something went wrong" });
+    }
+});
+exports.unverifiedTutors = unverifiedTutors;

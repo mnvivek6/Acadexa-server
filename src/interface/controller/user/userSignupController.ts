@@ -64,7 +64,7 @@ const sendverifyEmail = async (name: string, email: string, user_id: string) => 
                 pass: 'gklfwccxjdvifomb',
             }
         })
-          console.log(email,"asimmm");
+          
           
         const mailOptions = {
             from: 'vivekmn04@gmail.com',
