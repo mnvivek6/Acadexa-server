@@ -60,7 +60,7 @@ export const unverifiedTutors = async(req:Request, res:Response)=>{
         if (!response) {
             throw new AppError("something went wrong ",400)
         }
-        return response
+      res.status(200).json(response)
     } catch (error:any) {
         res.status(error.statusCode||500).json({message:error.message||"something went wrong"})
     }

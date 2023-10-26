@@ -70,7 +70,7 @@ const unverifiedTutors = (req, res) => __awaiter(void 0, void 0, void 0, functio
         if (!response) {
             throw new error_1.AppError("something went wrong ", 400);
         }
-        return response;
+        res.status(200).json(response);
     }
     catch (error) {
         res.status(error.statusCode || 500).json({ message: error.message || "something went wrong" });
