@@ -4,6 +4,7 @@ import { Course } from "../../../domain/entities/tutor/course"
 import { Tutor } from "../../../domain/entities/tutor/tutorValidation"
 import { User } from "../../../domain/entities/user/userValidation"
 import { adminLoginType } from "../../../interface/controller/admin/adminLoginController"
+import { unverifiedTutors } from "../../../interface/controller/admin/getTutors"
 import { AppError } from "../../../untils/error"
 import { MongoDBAdmin, adminModel } from "../../database/model/adminModel"
 import { categoryModel } from "../../database/model/categoryModel"
@@ -24,6 +25,7 @@ export type adminRepository = {
     searchUser:(searchQuery:string)=>Promise<User[]|undefined>
     searchTutor:(searchQuery:string)=>Promise<Tutor[]|undefined>
     UpdateIsblocktutor:(tutorid:string, action:string)=>Promise<boolean|undefined>
+    UnverifiedTutors:()=>Promise<Tutor[]>
 }
 
 const adminRepositoryImp = (AdminModel: MongoDBAdmin): adminRepository => {
@@ -112,7 +114,12 @@ const adminRepositoryImp = (AdminModel: MongoDBAdmin): adminRepository => {
         
         return isBlocked
     }
-    return {UpdateIsblocktutor,searchTutor,searchUser, findAdminbyEmail, getAdminById , updateProfileById,Addcategory,getcategory,getCourse,getTutors,editCategory,searchCourse}
+    const UnverifiedTutors= async():Promise<Tutor[]>=>{
+        const unVerifiedTutors = await tutorModel.find({verify: false})
+        if (!unVerifiedTutors)  throw new AppError("something went wrong while blocking user",500);
+        return unVerifiedTutors
+    }
+    return {UnverifiedTutors,UpdateIsblocktutor,searchTutor,searchUser, findAdminbyEmail, getAdminById , updateProfileById,Addcategory,getcategory,getCourse,getTutors,editCategory,searchCourse}
 }
 
 export default adminRepositoryImp

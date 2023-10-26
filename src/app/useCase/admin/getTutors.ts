@@ -21,3 +21,9 @@ export const blockedTutor = (adminRepository:adminRepository)=>
         const result=await  adminRepository.UpdateIsblocktutor(tutorid , action);
         return result
     }
+
+export const unverifiedtutors = (adminRepository:adminRepository)=>
+      async():Promise<Tutor[]>=>{
+        const tutors = await adminRepository.UnverifiedTutors()
+        return tutors;
+      }    
