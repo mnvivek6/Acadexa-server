@@ -4,7 +4,7 @@ import { BlockUser, SearchUserByName, getAllUsers } from "../controller/admin/ge
 import { UpdateProfile,  } from "../controller/admin/adminProfile"
 import { adminAuthToken } from "../middlewares/authMiddleware"
 import { addcategory, editCategory, getcategory } from "../controller/admin/addcategory"
-import { getAllTutors, getTutorsbyName, tutorBlock, tutorbyid, unverifiedTutors } from "../controller/admin/getTutors"
+import { decline, getAllTutors, getTutorsbyName, tutorBlock, tutorbyid, unverifiedTutors, verify } from "../controller/admin/getTutors"
 import { Courses, searchCourseByname } from "../controller/admin/getcourse"
 
 const adminRoute = express.Router()
@@ -24,6 +24,8 @@ adminRoute.get('/searchtutorbyname',adminAuthToken,getTutorsbyName)
 adminRoute.post('/blocktutor',adminAuthToken,tutorBlock)
 adminRoute.get('/unverifiedtutors',adminAuthToken,unverifiedTutors)
 adminRoute.get('/gettutorbyid/:tutorid',adminAuthToken,tutorbyid)
+adminRoute.post('/verify/:tutorid',adminAuthToken,verify)
+adminRoute.get('/decline',adminAuthToken,decline)
 
 
 export default adminRoute;
