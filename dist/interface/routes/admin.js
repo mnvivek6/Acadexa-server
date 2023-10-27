@@ -26,4 +26,7 @@ adminRoute.get('/searchuserbyname', authMiddleware_1.adminAuthToken, getUsers_1.
 adminRoute.get('/searchtutorbyname', authMiddleware_1.adminAuthToken, getTutors_1.getTutorsbyName);
 adminRoute.post('/blocktutor', authMiddleware_1.adminAuthToken, getTutors_1.tutorBlock);
 adminRoute.get('/unverifiedtutors', authMiddleware_1.adminAuthToken, getTutors_1.unverifiedTutors);
+adminRoute.get('/gettutorbyid/:tutorid', authMiddleware_1.adminAuthToken, getTutors_1.tutorbyid);
+adminRoute.post('/verify/:tutorid', authMiddleware_1.adminAuthToken, getTutors_1.verify);
+adminRoute.get('/decline', authMiddleware_1.adminAuthToken, getTutors_1.decline);
 exports.default = adminRoute;
