@@ -107,6 +107,12 @@ const adminRepositoryImp = (AdminModel) => {
             throw new error_1.AppError("something went wrong while blocking user", 500);
         return unVerifiedTutors;
     });
-    return { UnverifiedTutors, UpdateIsblocktutor, searchTutor, searchUser, findAdminbyEmail, getAdminById, updateProfileById, Addcategory, getcategory, getCourse, getTutors, editCategory, searchCourse };
+    const getTutorbyid = (tutorid) => __awaiter(void 0, void 0, void 0, function* () {
+        const tutor = yield tutorModel_1.tutorModel.findOne({ _id: tutorid });
+        if (!tutor)
+            throw new error_1.AppError("No such Tutor exists!", 401);
+        return tutor;
+    });
+    return { getTutorbyid, UnverifiedTutors, UpdateIsblocktutor, searchTutor, searchUser, findAdminbyEmail, getAdminById, updateProfileById, Addcategory, getcategory, getCourse, getTutors, editCategory, searchCourse };
 };
 exports.default = adminRepositoryImp;

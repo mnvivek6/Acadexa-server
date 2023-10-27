@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.unverifiedtutors = exports.blockedTutor = exports.SearchTutor = exports.AllTuTors = void 0;
+exports.gettutorbyid = exports.unverifiedtutors = exports.blockedTutor = exports.SearchTutor = exports.AllTuTors = void 0;
 const AllTuTors = (tutorRepository) => () => __awaiter(void 0, void 0, void 0, function* () {
     const tutors = yield tutorRepository.getAllTutors();
     return tutors;
@@ -30,3 +30,8 @@ const unverifiedtutors = (adminRepository) => () => __awaiter(void 0, void 0, vo
     return tutors;
 });
 exports.unverifiedtutors = unverifiedtutors;
+const gettutorbyid = (adminRepository) => (tutorid) => __awaiter(void 0, void 0, void 0, function* () {
+    const tutor = yield adminRepository.getTutorbyid(tutorid);
+    return tutor;
+});
+exports.gettutorbyid = gettutorbyid;

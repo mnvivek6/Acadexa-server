@@ -16,7 +16,7 @@ const verifyToken = (authHeader: string|string[]|undefined,secretekey:Secret | G
         
         if (!authHeader || !secretekey) {
         
-            return res.status(401).json({success:false,message:'Not Authenticated!',auth:false})
+            return res.status(401).json({success:false,message:'Not Authenticateddd!',auth:false})
         }
     
         interface MyRequest extends Request {
