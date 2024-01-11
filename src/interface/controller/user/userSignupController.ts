@@ -70,7 +70,7 @@ const sendverifyEmail = async (name: string, email: string, user_id: string) => 
             from: 'vivekmn04@gmail.com',
             to: email,
             subject: 'verification Email',
-            html: `<h1>Hello ${name},please click <a href="http://localhost:3000/verifymail/${user_id}">here</a> to verify your email.</p>`
+            html: `<h1>Hello ${name},please click <a href="https://untitledlegacy.online/verifymail/${user_id}">here</a> to verify your email.</p>`
         }
         const info = await transporter.sendMail(mailOptions)
 console.log(info);
