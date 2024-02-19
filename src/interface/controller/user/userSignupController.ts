@@ -33,6 +33,8 @@ export const userSignup = async (req: Request, res: Response) => {
             res.status(500).json({ message: 'something went wrong' })
         }
 
+        console.log(user.email);
+        
         if (emailValidator.validate(user.email)) {
            
             
