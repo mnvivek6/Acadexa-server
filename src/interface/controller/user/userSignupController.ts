@@ -77,7 +77,7 @@ console.log(info);
 
 
     } catch (error) {
-        // console.error('error sendign email:', error);/
+        console.error('error sendign email:', error);
 
     }
 
