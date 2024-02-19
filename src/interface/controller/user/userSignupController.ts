@@ -61,7 +61,7 @@ const sendverifyEmail = async (name: string, email: string, user_id: string) => 
             secure: true,
             auth: {
                 user: 'vivekmn04@gmail.com',
-                pass: 'gklfwccxjdvifomb',
+                pass: 'cmkb mgrg rhin fhck',
             }
         })
           
