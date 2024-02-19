@@ -16,7 +16,7 @@ export const userSignup = async (req: Request, res: Response) => {
     try {
 
         const user: User = req.body
-        // console.log(user);
+        console.log(user);
         
         if (!user.name || !user.email || !user.password || /^\s*$/.test(user.name) ||
             /^\s*$/.test(user.email) ||
@@ -72,7 +72,7 @@ const sendverifyEmail = async (name: string, email: string, user_id: string) => 
             from: 'vivekmn04@gmail.com',
             to: email,
             subject: 'verification Email',
-            html: `<h1>Hello ${name},please click <a href="https://untitledlegacy.online/verifymail/${user_id}">here</a> to verify your email.</p>`
+            html: `<h1>Hello ${name},please click <a href="https://acadexa-e-learn.vercel.app/verifymail/${user_id}">here</a> to verify your email.</p>`
         }
         const info = await transporter.sendMail(mailOptions)
 console.log(info);
