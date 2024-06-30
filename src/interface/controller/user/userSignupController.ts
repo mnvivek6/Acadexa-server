@@ -75,7 +75,7 @@ const sendverifyEmail = async (name: string, email: string, user_id: string) => 
             html: `<h1>Hello ${name},please click <a href="https://acadexa-e-learn.vercel.app/verifymail/${user_id}">here</a> to verify your email.</p>`
         }
         const info = await transporter.sendMail(mailOptions)
-console.log(info);
+
 
 
     } catch (error) {

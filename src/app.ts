@@ -22,7 +22,7 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended:false }))
 
 dotenv.config();
-connectDB("mongodb+srv://mvivekmn:1234@cluster0.kb2qbes.mongodb.net/acadexa?retryWrites=true&w=majority");
+connectDB(process.env.MONGODB_CONNECTION_URL|| '');
 
 //setup routes
 app.use('/',userRoute);
@@ -44,7 +44,7 @@ const errorHandler:ErrorRequestHandler=(error,req,res,next)=>{
 app.use(errorHandler)
 
 
-const PORT: number = Number(process.env.PORT) || 4000
+const PORT: number = Number(process.env.PORT) || 3000
 const server: Server = app.listen(4000,()=>console.log(`server is running ${PORT}`))
 
 const io = require('socket.io')(server,{

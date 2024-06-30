@@ -47,7 +47,7 @@ const userRepository = (0, userRepository_1.default)(db);
 const userSignup = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const user = req.body;
-        // console.log(user);
+        console.log(user);
         if (!user.name || !user.email || !user.password || /^\s*$/.test(user.name) ||
             /^\s*$/.test(user.email) ||
             /^\s*$/.test(user.password)) {
@@ -60,6 +60,7 @@ const userSignup = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         if (!createUser) {
             res.status(500).json({ message: 'something went wrong' });
         }
+        console.log(user.email);
         if (emailValidator.validate(user.email)) {
             sendverifyEmail(req.body.name, req.body.email, createUser._id);
         }
@@ -81,20 +82,20 @@ const sendverifyEmail = (name, email, user_id) => __awaiter(void 0, void 0, void
             secure: true,
             auth: {
                 user: 'vivekmn04@gmail.com',
-                pass: 'gklfwccxjdvifomb',
+                pass: 'cmkb mgrg rhin fhck',
             }
         });
         const mailOptions = {
             from: 'vivekmn04@gmail.com',
             to: email,
             subject: 'verification Email',
-            html: `<h1>Hello ${name},please click <a href="http://localhost:3000/verifymail/${user_id}">here</a> to verify your email.</p>`
+            html: `<h1>Hello ${name},please click <a href="https://acadexa-e-learn.vercel.app/verifymail/${user_id}">here</a> to verify your email.</p>`
         };
         const info = yield transporter.sendMail(mailOptions);
         console.log(info);
     }
     catch (error) {
-        // console.error('error sendign email:', error);/
+        console.error('error sendign email:', error);
     }
 });
 const verifyEmail = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
