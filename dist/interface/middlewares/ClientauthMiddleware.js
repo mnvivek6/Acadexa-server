@@ -19,7 +19,7 @@ const userSecretekey = 'Studentsecretkey';
 const verifyToken = (authHeader, secretekey, req, res, next) => {
     try {
         if (!authHeader || !secretekey) {
-            return res.status(401).json({ success: false, message: 'Not Authenticated!', auth: false });
+            return res.status(401).json({ success: false, message: 'Not Authenticateddd!', auth: false });
         }
         // Verify the JWT token
         const token = req.headers.user;
