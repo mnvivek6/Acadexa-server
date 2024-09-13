@@ -1,7 +1,7 @@
 
 import dotenv from 'dotenv'
 import path from 'path'
-import bcrypt from 'bcrypt'
+import bcryptjs from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import { adminLoginType } from '../../../interface/controller/admin/adminLoginController'
 
@@ -9,12 +9,12 @@ dotenv.config({path:path.resolve(__dirname,'../.env')})
 
 export const passwordHashing:Function =async(password:string):Promise<string>=> {
     
-    const hashedPassword = await bcrypt.hash(password,10)
+    const hashedPassword = await bcryptjs.hash(password,10)
     return  hashedPassword;
 }
 
 export const passwordCompare:Function = async(plainTextPassword:string,hashedPassword:string):Promise<boolean>=>{
-    const passowrd:boolean = await bcrypt.compare(plainTextPassword,hashedPassword)
+    const passowrd:boolean = await bcryptjs.compare(plainTextPassword,hashedPassword)
     return passowrd
 }
 
