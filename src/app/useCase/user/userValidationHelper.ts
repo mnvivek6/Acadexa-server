@@ -1,4 +1,4 @@
-import bcrypt from "bcrypt"
+import bcryptjs from "bcryptjs"
 import jwt from "jsonwebtoken"
 import dotenv from "dotenv"
 import path from "path"
@@ -7,11 +7,11 @@ import { User } from "../../../domain/entities/user/userValidation"
 dotenv.config({path:path.resolve(__dirname,'../.env')})
 
 export const passwordHashing:Function=async(password:string):Promise<string>=>{
-    const hashedPassword = await bcrypt.hash(password,10)
+    const hashedPassword = await bcryptjs.hash(password,10)
     return hashedPassword;
 }
 export const passwordCompare:Function = async(plainTextPassword:string,hashedPassword:string):Promise<boolean>=>{
-    const password:boolean = await bcrypt.compare(plainTextPassword,hashedPassword)
+    const password:boolean = await bcryptjs.compare(plainTextPassword,hashedPassword)
     return password
 }
 export const createToken = (user: User): string => {
