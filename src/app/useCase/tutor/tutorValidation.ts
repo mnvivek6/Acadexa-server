@@ -1,5 +1,5 @@
 import dotenv from "dotenv"
-import bcryptjs from "bcrypt"
+import bcryptjs from "bcryptjs"
 import jwt from 'jsonwebtoken'
 import path from "path"
 import { Tutor } from "../../../domain/entities/tutor/tutorValidation"
