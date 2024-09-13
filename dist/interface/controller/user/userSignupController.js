@@ -92,7 +92,6 @@ const sendverifyEmail = (name, email, user_id) => __awaiter(void 0, void 0, void
             html: `<h1>Hello ${name},please click <a href="https://acadexa-e-learn.vercel.app/verifymail/${user_id}">here</a> to verify your email.</p>`
         };
         const info = yield transporter.sendMail(mailOptions);
-        console.log(info);
     }
     catch (error) {
         console.error('error sendign email:', error);
